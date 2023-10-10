@@ -16,13 +16,13 @@ public static class GamesEndpoints //The endpoints method are always static
 
     public static  RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes){
 
-        InMemGameRepository gameRepository = new();//InMemGameRepository
+        // InMemGameRepository gameRepository = new();//InMemGameRepository
 
         var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
             
-            group.MapGet("/", () => gameRepository.GetAll());
+            group.MapGet("/", (IIGameRepository gameRepository) => gameRepository.GetAll());
 
-            group.MapGet("/{id}", (int id) => 
+            group.MapGet("/{id}", (IIGameRepository gameRepository, int id) => 
         {
             
           Game? game= gameRepository.Get(id); //the "?" will change the Game to a nullable value.
@@ -40,7 +40,7 @@ public static class GamesEndpoints //The endpoints method are always static
         }).WithName("GetGame");
 
 
-        group.MapPost("/", (Game game) =>
+        group.MapPost("/",  (IIGameRepository gameRepository, Game game) =>
         {
             gameRepository.Create(game);
 
@@ -49,7 +49,7 @@ public static class GamesEndpoints //The endpoints method are always static
 } );
 
 
-group.MapPut("/{id}", (int id, Game updatedGame)=>{
+group.MapPut("/{id}", (int id,IIGameRepository gameRepository, Game updatedGame)=>{
 
   Game? existingGame= gameRepository.Get(id)  ; //the "?" will change the Game to a nullable value.
 
@@ -71,13 +71,13 @@ group.MapPut("/{id}", (int id, Game updatedGame)=>{
 });
 
 
-group.MapDelete("/{id}",(int id)=>{
+group.MapDelete("/{id}",(IIGameRepository gameRepository,int id)=>{
 
    Game? game= gameRepository.Get(id); //the "?" will change the Game to a nullable value.
 
           if(game is not null){
 
-            gameRepository.DeleteGame(id);
+            gameRepository.Delete(id);
           }
 
           else if(game is null){
