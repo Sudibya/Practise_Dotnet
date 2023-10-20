@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameStore.API.Dtos;
 using GameStore.API.Entities;
 using GameStore.API.Repositories;
 
@@ -20,7 +21,7 @@ public static class GamesEndpoints //The endpoints method are always static
 
         var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
             
-            group.MapGet("/", (IIGameRepository gameRepository) => gameRepository.GetAll());
+            group.MapGet("/", (IIGameRepository gameRepository) => gameRepository.GetAll().Select(game => game.AsDto()));
 
             group.MapGet("/{id}", (IIGameRepository gameRepository, int id) => 
         {
@@ -28,7 +29,7 @@ public static class GamesEndpoints //The endpoints method are always static
           Game? game= gameRepository.Get(id); //the "?" will change the Game to a nullable value.
 
 
-            return game is not null? Results.Ok(game) :Results.NotFound();
+            return game is not null? Results.Ok(game.AsDto()) :Results.NotFound();
 
         //   if(game is null){
 
@@ -40,8 +41,17 @@ public static class GamesEndpoints //The endpoints method are always static
         }).WithName("GetGame");
 
 
-        group.MapPost("/",  (IIGameRepository gameRepository, Game game) =>
-        {
+        group.MapPost("/",  (IIGameRepository gameRepository, CreateGameDto gameDto) =>
+        { 
+          Game game = new(){
+            Name = gameDto.Name,
+            Genre = gameDto.Genre,
+            Price = gameDto.Price,
+            ReleaseDate = gameDto.ReleaseDate,
+            ImageUrl= gameDto.ImageUrl
+
+          };
+
             gameRepository.Create(game);
 
   return Results.CreatedAtRoute(GetEndPointName, new {id = game.Id}, game);
@@ -49,7 +59,7 @@ public static class GamesEndpoints //The endpoints method are always static
 } );
 
 
-group.MapPut("/{id}", (int id,IIGameRepository gameRepository, Game updatedGame)=>{
+group.MapPut("/{id}", (int id,IIGameRepository gameRepository, UpdateGameDto updatedGameDto)=>{
 
   Game? existingGame= gameRepository.Get(id)  ; //the "?" will change the Game to a nullable value.
 
@@ -58,11 +68,11 @@ group.MapPut("/{id}", (int id,IIGameRepository gameRepository, Game updatedGame)
             return Results.NotFound();
           }
 
-          existingGame.Name = updatedGame.Name;
-          existingGame.Genre=updatedGame.Genre;
-          existingGame.Price=updatedGame.Price;
-          existingGame.ReleaseDate=updatedGame.ReleaseDate;
-          existingGame.ImageUrl=updatedGame.ImageUrl;
+          existingGame.Name = updatedGameDto.Name;
+          existingGame.Genre=updatedGameDto.Genre;
+          existingGame.Price=updatedGameDto.Price;
+          existingGame.ReleaseDate=updatedGameDto.ReleaseDate;
+          existingGame.ImageUrl=updatedGameDto.ImageUrl;
 
           gameRepository.UpdateGame(existingGame);
 
