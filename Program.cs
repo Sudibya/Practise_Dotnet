@@ -1,4 +1,5 @@
 
+using GameStore.API.Data;
 using GameStore.API.Endpoints;
 using GameStore.API.Repositories;
 
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IIGameRepository, InMemGameRepository>();
 
 var connString=builder.Configuration.GetConnectionString("GameStoreContext");
-
+builder.Services.AddSqlServer<GameStoreContext>(connString);
 var app = builder.Build(); //Add middleware, services, and routes in the Application.
 
 app.MapGamesEndpoints();
