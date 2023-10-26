@@ -13,6 +13,8 @@ var connString=builder.Configuration.GetConnectionString("GameStoreContext");
 builder.Services.AddSqlServer<GameStoreContext>(connString);
 var app = builder.Build(); //Add middleware, services, and routes in the Application.
 
+app.Services.InitializeDb();
+
 app.MapGamesEndpoints();
 
 app.Run();
