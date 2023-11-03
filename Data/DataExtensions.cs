@@ -1,3 +1,4 @@
+using GameStore.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.API.Data;
@@ -11,4 +12,12 @@ public static class DataExtensions
         var dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
         dbContext.Database.Migrate();
     }
+
+    public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration){
+        var connString=configuration.GetConnectionString("GameStoreContext");
+        services.AddSqlServer<GameStoreContext>(connString)
+        .AddScoped<IIGameRepository,EntityFrameworkGamesRepository>();
+                
+        return services;
+    }  
 }

@@ -12,97 +12,104 @@ namespace GameStore.API.Endpoints;
 public static class GamesEndpoints //The endpoints method are always static
 {
 
-    const string GetEndPointName = "GetGame";
-    
-
-    public static  RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes){
-
-        // InMemGameRepository gameRepository = new();//InMemGameRepository
-
-        var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
-            
-            group.MapGet("/", (IIGameRepository gameRepository) => gameRepository.GetAll().Select(game => game.AsDto()));
-
-            group.MapGet("/{id}", (IIGameRepository gameRepository, int id) => 
-        {
-            
-          Game? game= gameRepository.Get(id); //the "?" will change the Game to a nullable value.
+  const string GetEndPointName = "GetGame";
 
 
-            return game is not null? Results.Ok(game.AsDto()) :Results.NotFound();
+  public static RouteGroupBuilder MapGamesEndpoints(this IEndpointRouteBuilder routes)
+  {
 
-        //   if(game is null){
+    // InMemGameRepository gameRepository = new();//InMemGameRepository
 
-        //     return Results.NotFound();
-        //   }
+    var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
 
-        //   return Results.Ok(game);
-        
-        }).WithName("GetGame");
+    group.MapGet("/", async (IIGameRepository gameRepository) => (await gameRepository.GetAllAsync()).Select(game => game.AsDto()));
 
+    group.MapGet("/{id}",async (IIGameRepository gameRepository, int id) =>
+{
 
-        group.MapPost("/",  (IIGameRepository gameRepository, CreateGameDto gameDto) =>
-        { 
-          Game game = new(){
-            Name = gameDto.Name,
-            Genre = gameDto.Genre,
-            Price = gameDto.Price,
-            ReleaseDate = gameDto.ReleaseDate,
-            ImageUrl= gameDto.ImageUrl
-
-          };
-
-            gameRepository.Create(game);
-
-  return Results.CreatedAtRoute(GetEndPointName, new {id = game.Id}, game);
-
-} );
+   Game? game = await gameRepository.GetAsync(id); //the "?" will change the Game to a nullable value.
 
 
-group.MapPut("/{id}", (int id,IIGameRepository gameRepository, UpdateGameDto updatedGameDto)=>{
+  return game is not null ? Results.Ok(game.AsDto()) : Results.NotFound();
 
-  Game? existingGame= gameRepository.Get(id)  ; //the "?" will change the Game to a nullable value.
+  //   if(game is null){
 
-          if(existingGame is null){
+  //     return Results.NotFound();
+  //   }
 
-            return Results.NotFound();
-          }
+  //   return Results.Ok(game);
 
-          existingGame.Name = updatedGameDto.Name;
-          existingGame.Genre=updatedGameDto.Genre;
-          existingGame.Price=updatedGameDto.Price;
-          existingGame.ReleaseDate=updatedGameDto.ReleaseDate;
-          existingGame.ImageUrl=updatedGameDto.ImageUrl;
-
-          gameRepository.UpdateGame(existingGame);
-
-          return Results.NoContent();
-          
-});
+}).WithName("GetGame");
 
 
-group.MapDelete("/{id}",(IIGameRepository gameRepository,int id)=>{
+    group.MapPost("/", async (IIGameRepository gameRepository, CreateGameDto gameDto) =>
+    {
+      Game game = new()
+      {
+        Name = gameDto.Name,
+        Genre = gameDto.Genre,
+        Price = gameDto.Price,
+        ReleaseDate = gameDto.ReleaseDate,
+        ImageUrl = gameDto.ImageUrl
 
-   Game? game= gameRepository.Get(id); //the "?" will change the Game to a nullable value.
+      };
 
-          if(game is not null){
+      await gameRepository.CreateAsync(game);
 
-            gameRepository.Delete(id);
-          }
+      return Results.CreatedAtRoute(GetEndPointName, new { id = game.Id }, game);
 
-          else if(game is null){
-            return Results.Ok("No such game");
-          }
-
-          return Results.Ok($"Deleted the game name:{game?.Name}");
-        
-        
+    });
 
 
-});
+    group.MapPut("/{id}", (int id, IIGameRepository gameRepository, UpdateGameDto updatedGameDto) =>
+    {
+
+      Game? existingGame = gameRepository.GetAsync(id); //the "?" will change the Game to a nullable value.
+
+      if (existingGame is null)
+      {
+
+        return Results.NotFound();
+      }
+
+      existingGame.Name = updatedGameDto.Name;
+      existingGame.Genre = updatedGameDto.Genre;
+      existingGame.Price = updatedGameDto.Price;
+      existingGame.ReleaseDate = updatedGameDto.ReleaseDate;
+      existingGame.ImageUrl = updatedGameDto.ImageUrl;
+
+      gameRepository.UpdateGameAsync(existingGame);
+
+      return Results.NoContent();
+
+    });
+
+
+    group.MapDelete("/{id}", (IIGameRepository gameRepository, int id) =>
+    {
+
+      Game? game = gameRepository.GetAsync(id); //the "?" will change the Game to a nullable value.
+
+      if (game is not null)
+      {
+
+        gameRepository.DeleteAsync(id);
+      }
+
+      else if (game is null)
+      {
+        return Results.Ok("No such game");
+      }
+
+      return Results.Ok($"Deleted the game name:{game?.Name}");
+
+
+
+
+    });
 
     return group;
 
-    }
-    
+  }
+
 }

@@ -24,23 +24,23 @@ public class InMemGameRepository : IIGameRepository
 
     }
 };
-    public IEnumerable<Game> GetAll()
+    public IEnumerable<Game> GetAllAsync()
     {
         return games;
     }
-    public Game? Get(int id)
+    public Game? GetAsync(int id)
     {
 
         return games.Find(game => game.Id == id);
     }
 
-    public void Create(Game game)
+    public void CreateAsync(Game game)
     {
         game.Id = games.Max(game => game.Id) + 1;
         games.Add(game);
     }
 
-    public void UpdateGame(Game updatedGame)
+    public void UpdateGameAsync(Game updatedGame)
     {
 
         var index = games.FindIndex(game => game.Id == updatedGame.Id);
@@ -54,7 +54,7 @@ public class InMemGameRepository : IIGameRepository
         games.RemoveAt(index);
     }
 
-    public void Delete(int id)
+    public void DeleteAsync(int id)
     {
         var index = games.FindIndex(game => game.Id == id);
         games.RemoveAt(index);

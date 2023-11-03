@@ -7,10 +7,13 @@ using GameStore.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddScoped<IIGameRepository, InMemGameRepository>(); //This is AddScoped this recreate InMemGameRepository every time we call it.
-builder.Services.AddSingleton<IIGameRepository, InMemGameRepository>();
+builder.Services.AddRepositories(builder.Configuration);
 
-var connString=builder.Configuration.GetConnectionString("GameStoreContext");
-builder.Services.AddSqlServer<GameStoreContext>(connString);
+
+// AddScoped<IIGameRepository, EntityFrameworkGamesRepository>();
+
+// var connString=builder.Configuration.GetConnectionString("GameStoreContext");
+// builder.Services.AddSqlServer<GameStoreContext>(connString);
 var app = builder.Build(); //Add middleware, services, and routes in the Application.
 
 app.Services.InitializeDb();
