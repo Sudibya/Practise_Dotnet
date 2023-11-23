@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sudibyajyoti-jena/Documents/dotnet_project/GameStore.API/GameStore.API.csproj": {}
+    "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj": {}
   },
   "projects": {
-    "/home/sudibyajyoti-jena/Documents/dotnet_project/GameStore.API/GameStore.API.csproj": {
+    "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sudibyajyoti-jena/Documents/dotnet_project/GameStore.API/GameStore.API.csproj",
+        "projectUniqueName": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj",
         "projectName": "GameStore.API",
-        "projectPath": "/home/sudibyajyoti-jena/Documents/dotnet_project/GameStore.API/GameStore.API.csproj",
+        "projectPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj",
         "packagesPath": "/home/sudibyajyoti-jena/.nuget/packages/",
-        "outputPath": "/home/sudibyajyoti-jena/Documents/dotnet_project/GameStore.API/obj/",
+        "outputPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sudibyajyoti-jena/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -72,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.113/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.114/RuntimeIdentifierGraph.json"
         }
       }
     }

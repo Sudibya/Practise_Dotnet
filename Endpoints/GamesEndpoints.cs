@@ -21,7 +21,7 @@ public static class GamesEndpoints //The endpoints method are always static
 
         var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
             
-            group.MapGet("/", async (IIGameRepository gameRepository) => (await gameRepository.GetAllAsync()).Select(game => game.AsDto()));
+            group.MapGet("/", async (IIGameRepository gameRepository) => (await gameRepository.GetAllAsync()).Select(game => game.AsDto())).RequireAuthorization();
 
             group.MapGet("/{id}", async (IIGameRepository gameRepository, int id) => 
         {
