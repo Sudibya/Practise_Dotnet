@@ -2990,11 +2990,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj",
+      "projectUniqueName": "/home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/GameStore.API.csproj",
       "projectName": "GameStore.API",
-      "projectPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj",
+      "projectPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/GameStore.API.csproj",
       "packagesPath": "/home/sudibyajyoti-jena/.nuget/packages/",
-      "outputPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/obj/",
+      "outputPath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/sudibyajyoti-jena/.nuget/NuGet/NuGet.Config"

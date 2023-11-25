@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStore.API.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    [Migration("20231025124503_InitialCreate")]
+    [Migration("20231124071952_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,6 +58,40 @@ namespace GameStore.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("Practise_Dotnet.Entities.UserMaster", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateOfActivation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginId")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

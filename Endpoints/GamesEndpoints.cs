@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GameStore.API.Dtos;
 using GameStore.API.Entities;
 using GameStore.API.Repositories;
@@ -21,7 +17,7 @@ public static class GamesEndpoints //The endpoints method are always static
 
         var group = routes.MapGroup("/games").WithParameterValidation(); // we got this from the NuGet packages it will add server side validation.
             
-            group.MapGet("/", async (IIGameRepository gameRepository) => (await gameRepository.GetAllAsync()).Select(game => game.AsDto())).RequireAuthorization();
+            group.MapGet("/", async (IIGameRepository gameRepository) => (await gameRepository.GetAllAsync()).Select(game => game.AsDto()));
 
             group.MapGet("/{id}", async (IIGameRepository gameRepository, int id) => 
         {

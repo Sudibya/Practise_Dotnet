@@ -5,6 +5,7 @@ using GameStore.API.Repositories;
 
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 // builder.Services.AddScoped<IIGameRepository, InMemGameRepository>(); //This is AddScoped this recreate InMemGameRepository every time we call it.
 builder.Services.AddRepositories(builder.Configuration);

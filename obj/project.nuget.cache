@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ItmFTbdwZ4CXqj269lWll8bIH7xq+TAihan0mjkBiVGjxZ2nqdAdjpXhMywu5rbgLLxCGknbiyZWEHGAGLN4rw==",
+  "dgSpecHash": "P5HoTt4tjLvNYN4Me5yCYFSXNMTeGyLHyVn0vaOWuOIG0im5XZB9lxE2w68ctKqj/6sCLZti6snEttGcwP35TQ==",
   "success": true,
-  "projectFilePath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/Practise_Dotnet/GameStore.API.csproj",
+  "projectFilePath": "/home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/GameStore.API.csproj",
   "expectedPackageFiles": [
     "/home/sudibyajyoti-jena/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/home/sudibyajyoti-jena/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",

@@ -21,6 +21,9 @@ public static class DataExtensions
         services.AddSqlServer<GameStoreContext>(connString)
         .AddScoped<IIGameRepository, EntityFrameworkGamesRepository>();
 
+        services.AddSqlServer<GameStoreContext>(connString)
+            .AddScoped<IIUserMasterRepository, UserMasterRepositoryLogic>();
+
         return services;
     }
 }
