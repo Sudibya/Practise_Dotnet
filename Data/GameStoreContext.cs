@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using GameStore.API.Entities;
 using System.Reflection;
-using GameStore.API.Entities;
 
 namespace GameStore.API.Data;
 

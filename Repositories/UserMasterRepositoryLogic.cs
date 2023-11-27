@@ -45,5 +45,7 @@ public class UserMasterRepositoryLogic : IIUserMasterRepository
             await dbContext.SaveChangesAsync();
         }
     }
+
+    
 }
 

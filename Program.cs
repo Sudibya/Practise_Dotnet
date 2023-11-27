@@ -23,6 +23,8 @@ await app.Services.InitializeDbAsync();
 
 
 
-app.MapGamesEndpoints();
+app.MapAllEndpoints();
+
+
 
 app.Run();
