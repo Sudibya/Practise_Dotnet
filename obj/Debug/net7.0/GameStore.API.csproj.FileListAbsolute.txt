@@ -253,3 +253,4 @@
 /home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/obj/Debug/net7.0/GameStore.API.pdb
 /home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/obj/Debug/net7.0/GameStore.API.genruntimeconfig.cache
 /home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/obj/Debug/net7.0/ref/GameStore.API.dll
+/home/sudibyajyoti-jena/Desktop/Security Module Master/GameStore.API/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -20,3 +20,7 @@ dotnet user-secrets set "ConnectionStrings:GameStoreContext" "Server=localhost; 
 ## How to see the list of al the secrets that was stored
 
 dotnet user-secrets list
+
+
+## dotnet user-jwts
+## dotnet user-jwts create (This will create the token that we can test.)
