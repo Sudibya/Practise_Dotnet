@@ -15,6 +15,9 @@ public class GameStoreContext :DbContext
         public DbSet<Game> Games => Set<Game>();
         public DbSet<UserMaster> Users => Set<UserMaster>();
 
+        public DbSet<ModuleMaster> Module { get; set; }
+        public DbSet<ProgramMaster> Program { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

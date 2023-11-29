@@ -3,14 +3,23 @@ using GameStore.API.Data;
 using GameStore.API.Endpoints;
 using GameStore.API.Repositories;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 
 Dictionary<string, List<string>> gamesMap = new(){
 
-   { "Player 1", new List<string> { "Game A", "Game B", "Game C" }},
+   { "Player1", new List<string> { "Game A", "Game B", "Game C" }},
    { "Player 2", new List<string> { "Game D", "Game E", "Game F" }},
    { "Player 3", new List<string> { "Game G", "Game H", "Game I" }},
    { "Player 4", new List<string> { "Game J", "Game K", "Game L" }}
+};
+
+Dictionary<string, List<string>> SubscriptionMap = new(){
+
+   { "Silver", new List<string> { "Game A", "Game B", "Game C" }},
+   { "Gold", new List<string> { "Game D", "Game E", "Game F" }},
+   { "Diamond", new List<string> { "Game G", "Game H", "Game I" }},
+   { "Platinum", new List<string> { "Game J", "Game K", "Game L" }}
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,10 +41,33 @@ await app.Services.InitializeDbAsync();
 
 
 app.MapAllEndpoints();
-app.MapGet("/myGames",(ClaimsPrincipal user))=>{
+app.MapGet("/myGames",()=>gamesMap).RequireAuthorization(policy=>{
+    policy.RequireRole("admin");
+});
 
-    ArgumentNullException.ThrowIfNull(user.)
-};
+app.MapGet("/usersGames", (ClaimsPrincipal user) =>
+{   
+    var hasClaim = user.HasClaim(claim => claim.Type== "subscription");
+
+    if(hasClaim){
+        var  subs = user.FindFirstValue("subscription")??throw new Exception("Claim has no value");
+        return  Task.FromResult(Results.Ok(SubscriptionMap[subs]));
+    }
+
+    //dotnet user-jwts create --role "player" -n player1 --claim "subscription=gold" 
+
+    ArgumentNullException.ThrowIfNull(user?.Identity?.Name);
+
+    var userName = user.Identity.Name;
+
+   if (!gamesMap.ContainsKey(userName)) {
+        return Task.FromResult(Results.NotFound());
+    }
+    return Task.FromResult(Results.Ok(gamesMap[userName]));
+}).RequireAuthorization(policy =>
+{
+    policy.RequireRole("player");
+});
 
 
 
