@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 
 
@@ -19,7 +20,8 @@ namespace GameStore.API.Entities
 
     // Navigation property for Module
     [ForeignKey ("ModuleID")]
-    public virtual required ModuleMaster ModuleMaster { get; set; }
+    [JsonIgnore]
+    public virtual ModuleMaster? ModuleMaster { get; set; }
 
     [Required]
     [StringLength(255)]
@@ -35,5 +37,11 @@ namespace GameStore.API.Entities
 
     [StringLength(255)]
     public required string ProgramHeader { get; set; }
+
+    [ForeignKey("RoleId")]
+    [JsonIgnore]
+    public virtual RoleMaster? RoleMaster { get; set; }
+
+
     }
 }

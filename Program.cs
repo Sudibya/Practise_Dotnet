@@ -1,9 +1,9 @@
 
 using GameStore.API.Data;
 using GameStore.API.Endpoints;
-using GameStore.API.Repositories;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+using System.Text.Json.Serialization;
+
 
 
 Dictionary<string, List<string>> gamesMap = new(){
@@ -39,13 +39,11 @@ var app = builder.Build(); //Add middleware, services, and routes in the Applica
 await app.Services.InitializeDbAsync();
 
 
-
-app.MapAllEndpoints();
-app.MapGet("/myGames",()=>gamesMap).RequireAuthorization(policy=>{
+app.MapGet("/myyyyyyyGames",()=>gamesMap).RequireAuthorization(policy=>{
     policy.RequireRole("admin");
 });
 
-app.MapGet("/usersGames", (ClaimsPrincipal user) =>
+app.MapGet("/userssssssGames", (ClaimsPrincipal user) =>
 {   
     var hasClaim = user.HasClaim(claim => claim.Type== "subscription");
 
@@ -70,5 +68,7 @@ app.MapGet("/usersGames", (ClaimsPrincipal user) =>
 });
 
 
+
+app.MapAllEndpoints();
 
 app.Run();

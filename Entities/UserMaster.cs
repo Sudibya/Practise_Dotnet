@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 
 namespace GameStore.API.Entities;
 
@@ -20,6 +23,14 @@ public class UserMaster
 
     [Required]
     public DateTime DateOfActivation { get; set; }
-
+    
+    
     public int EmployeeId { get; set; } 
+
+    [ForeignKey("RoleId")]
+    [JsonIgnore]
+    public virtual RoleMaster? RoleMaster { get; set; }
+
 }
+
+

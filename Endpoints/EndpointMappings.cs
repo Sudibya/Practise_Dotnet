@@ -10,6 +10,9 @@ namespace GameStore.API.Endpoints
     {
         routes.MapGamesEndpoints();
         routes.MapUserMasterEndpoints();
+        routes.MapModuleMasterEndpoints();
+        routes.MapProgramMasterEndpoints();
+        
     }
     }
 }

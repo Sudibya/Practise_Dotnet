@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using GameStore.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,13 @@ public static class DataExtensions
 
         services.AddSqlServer<GameStoreContext>(connString)
             .AddScoped<IIUserMasterRepository, UserMasterRepositoryLogic>();
+        
+        services.AddSqlServer<GameStoreContext>(connString)
+            .AddScoped<IIProgramMasterRepository, ProgramMasterRepositoryLogic>();
 
+        services.AddSqlServer<GameStoreContext>(connString)
+            .AddScoped<IIModuleMasterRepository, ModuleMasterRepositoryLogic>();
+        
         return services;
     }
 }

@@ -24,3 +24,6 @@ dotnet user-secrets list
 
 ## dotnet user-jwts
 ## dotnet user-jwts create (This will create the token that we can test.)
+
+
+## dotnet ef database update

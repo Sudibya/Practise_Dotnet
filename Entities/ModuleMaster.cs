@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 
 namespace GameStore.API.Entities
@@ -14,5 +16,10 @@ namespace GameStore.API.Entities
 
     // Navigation property for Programs
     public virtual ICollection<ProgramMaster>? ProgramMaster { get; set; }
+
+    [ForeignKey("RoleId")]
+    [JsonIgnore]
+    public virtual RoleMaster? RoleMaster { get; set; }
+
     }
 }

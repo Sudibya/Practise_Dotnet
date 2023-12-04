@@ -6,11 +6,11 @@ using GameStore.API.Entities;
 
 namespace GameStore.API.Repositories
 {
-    public class EntityFrameworkProgramMasterRepository : IIProgramMasterRepository
+    public class ProgramMasterRepositoryLogic : IIProgramMasterRepository
     {
         private readonly GameStoreContext dbContext;
 
-        public EntityFrameworkProgramMasterRepository(GameStoreContext dbContext)
+        public ProgramMasterRepositoryLogic(GameStoreContext dbContext)
         {
             this.dbContext = dbContext;
         }
