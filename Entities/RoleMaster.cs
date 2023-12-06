@@ -24,4 +24,5 @@ public class RoleMaster
             public DateTime CreatedDate { get; set; }
             public required string CreatedBy { get; set; }
 
+
 }

@@ -20,6 +20,8 @@ public class GameStoreContext :DbContext
         public DbSet<ModuleMaster> Module { get; set; }
         public DbSet<ProgramMaster> Program { get; set; }
 
+        public DbSet<RoleMaster> Roles { get; set; } 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         optionsBuilder.UseLazyLoadingProxies(false); // Disable lazy loading

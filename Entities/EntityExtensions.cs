@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Reflection;
 using GameStore.API.Dtos;
 
@@ -70,6 +71,30 @@ public static class EntityExtensions
         // Additional properties as needed
     );
 }
+
+public static RoleMasterDto AsDto(this RoleMaster Roles)
+        {
+            if (Roles == null)
+            {
+                throw new ArgumentNullException(nameof(Roles), "RoleMaster cannot be null");
+            }
+
+            // Check if associated collections are null before calling AsDto
+            List<ProgramMasterDto> programMasters = Roles.ProgramMasters?.Select(p => p.AsDto()).ToList();
+            List<ModuleMasterDto> moduleMasters = Roles.ModuleMasters?.Select(m => m.AsDto()).ToList();
+            List<UserMasterDto> userMasters = Roles.UserMasters?.Select(u => u.AsDto()).ToList();
+
+            return new RoleMasterDto
+            (
+                Roles.RoleId,
+                Roles.RoleName,
+                programMasters,
+                moduleMasters,
+                userMasters,
+                Roles.CreatedDate,
+                Roles.CreatedBy
+            );
+        }
 
     
 

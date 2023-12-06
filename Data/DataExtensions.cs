@@ -30,6 +30,9 @@ public static class DataExtensions
 
         services.AddSqlServer<GameStoreContext>(connString)
             .AddScoped<IIModuleMasterRepository, ModuleMasterRepositoryLogic>();
+
+        services.AddSqlServer<GameStoreContext>(connString)
+            .AddScoped<IIRoleMasterRepository, RoleMasterRepositoryLogic>();
         
         return services;
     }
